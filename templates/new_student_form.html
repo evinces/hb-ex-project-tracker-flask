@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <title>Add New Student</title>
+<body>
+    {% for message in get_flashed_messages() %}
+        <p>Student added: <a href="/student?github={{ message }}">Link to student</a></p>
+    {% endfor %}
+    <form action="/student-add" method="POST">
+        <label>First Name
+            <input type="text" name="first_name">
+        </label><br>
+        <label>Last Name
+            <input type="text" name="last_name">
+        </label><br>
+        <label>GitHub
+            <input type="text" name="github">
+        </label><br>
+        <input type="submit" value="Add Student">
+    </form>
+</body>
+</html>

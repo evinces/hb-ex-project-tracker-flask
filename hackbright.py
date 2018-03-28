@@ -59,6 +59,22 @@ def make_new_student(first_name, last_name, github):
         first=first_name, last=last_name)
 
 
+def make_new_project(title, desc, max_grade):
+    """Add a new project and print confirmation"""
+
+    QUERY = """
+        INSERT INTO projects (title, description, max_grade)
+          VALUES (:title, :desc, :max_grade)
+        """
+
+    db.session.execute(QUERY, {'title': title,
+                               'desc': desc,
+                               'max_grade': max_grade})
+    db.session.commit()
+
+    print "Successfully added project: {title}".format(title=title)
+
+
 def get_project_by_title(title):
     """Given a project title, print information about the project."""
 
@@ -93,8 +109,8 @@ def get_grade_by_github_title(github, title):
 
     row = db_cursor.fetchone()
 
-    print "Student {acct} in project {title} received grade of {grade}".format(
-        acct=github, title=title, grade=row[0])
+    # print "Student {acct} in project {title} received grade of {grade}".format(
+    #     acct=github, title=title, grade=row[0])
 
     return row
 
@@ -117,6 +133,26 @@ def assign_grade(github, title, grade):
         grade=grade, acct=github, title=title)
 
 
+def update_grade(github, title, grade):
+    """Update a student a grade on an assignment and print a confirmation."""
+
+    QUERY = """
+        UPDATE grades
+           SET grade = :grade
+         WHERE student_github = :github
+           AND project_title = :title
+        """
+
+    db_cursor = db.session.execute(QUERY, {'github': github,
+                                           'title': title,
+                                           'grade': grade})
+
+    db.session.commit()
+
+    print "Successfully updated grade of {grade} for {acct} in {title}".format(
+        grade=grade, acct=github, title=title)
+
+
 def get_grades_by_github(github):
     """Get a list of all grades for a student by their github username"""
 
@@ -130,9 +166,9 @@ def get_grades_by_github(github):
 
     rows = db_cursor.fetchall()
 
-    for row in rows:
-        print "Student {acct} received grade of {grade} for {title}".format(
-            acct=github, grade=row[1], title=row[0])
+    # for row in rows:
+    #     print "Student {acct} received grade of {grade} for {title}".format(
+    #         acct=github, grade=row[1], title=row[0])
 
     return rows
 
@@ -153,6 +189,34 @@ def get_grades_by_title(title):
     for row in rows:
         print "Student {acct} received grade of {grade} for {title}".format(
             acct=row[0], grade=row[1], title=title)
+
+    return rows
+
+
+def get_all_students():
+    """Get a list of all students"""
+
+    QUERY = """
+        SELECT first_name, last_name, github FROM students
+    """
+
+    db_cursor = db.session.execute(QUERY)
+
+    rows = db_cursor.fetchall()
+
+    return rows
+
+
+def get_all_projects():
+    """Get a list of all projects"""
+
+    QUERY = """
+        SELECT title FROM projects
+    """
+
+    db_cursor = db.session.execute(QUERY)
+
+    rows = db_cursor.fetchall()
 
     return rows
 
