@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <title>
+        {%- block title %}Hackbright Student Project Site{% endblock -%}
+    </title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    {% for type_of, content in get_flashed_messages() %}
+        {% if type_of == 'student' %}
+            <p>
+                Student added:
+                <a href="/student?github={{ content }}">Link to student</a>
+            </p>
+        {% elif type_of == 'project' %}
+            <p>
+                Project added:
+                <a href="/project?title={{ content }}">Link to project</a>
+            </p>
+        {% else %}
+            <p>
+                Grade added:
+                <a href="/project?title={{ content }}">Link to project</a>
+            </p>
+        {% endif %}
+    {% endfor %}
+    {% block body %}{% endblock %}
+</body>
+</html>

@@ -1,17 +1,15 @@
-<!doctype html>
-<html>
-<head>
-    <title>Student Info</title>
-</head>
-<body>
-    <h1>{{ first }} {{ last }}</h1>
-    <p>GitHub Account: <a href="http://github.com/{{ github }}">{{ github }}</a></p>
-    {% if grades %}
-    <ul>
-        {% for title, grade in grades %}
-            <li>Project title: <a href="/project?title={{ title }}">{{ title }}</a>, Grade: {{ grade }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Student Info{% endblock %}
+
+{% block body %}
+<h1>{{ first }} {{ last }}</h1>
+<p>GitHub Account: <a href="http://github.com/{{ github }}">{{ github }}</a></p>
+{% if grades %}
+<ul>
+    {% for title, grade in grades %}
+        <li>Project title: <a href="/project?title={{ title }}">{{ title }}</a>, Grade: {{ grade }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

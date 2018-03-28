@@ -1,22 +1,18 @@
-<!doctype html>
-<html>
-<head>
-    <title>Add New Project</title>
-<body>
-    {% for message in get_flashed_messages() %}
-        <p>Project added: <a href="/project?title={{ message }}">Link to project</a></p>
-    {% endfor %}
-    <form action="/project-add" method="POST">
-        <label>Title
-            <input type="text" name="title">
-        </label><br>
-        <label>Max Grade
-            <input type="text" name="max_grade">
-        </label><br>
-        <label>Description
-            <textarea name="desc" rows="10" cols="50"></textarea>
-        </label><br>
-        <input type="submit" value="Add Project">
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Add a Project{% endblock %}
+
+{% block body %}
+<form action="/project-add" method="POST">
+    <label>Title
+        <input type="text" name="title">
+    </label><br>
+    <label>Max Grade
+        <input type="text" name="max_grade">
+    </label><br>
+    <label>Description
+        <textarea name="desc" rows="10" cols="50"></textarea>
+    </label><br>
+    <input type="submit" value="Add Project">
+</form>
+{% endblock %}

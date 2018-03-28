@@ -52,7 +52,7 @@ def add_student():
 
     hackbright.make_new_student(first_name, last_name, github)
 
-    flash(github)
+    flash(('student', github))
 
     return redirect("/student-add")
 
@@ -77,7 +77,7 @@ def add_project():
 
     hackbright.make_new_project(title, desc, max_grade)
 
-    flash(title)
+    flash(('project', title))
 
     return redirect("/project-add")
 
@@ -125,7 +125,7 @@ def add_grade():
     else:
         hackbright.update_grade(student_github, project_title, grade)
 
-    flash(project_title)
+    flash(('grade', project_title))
 
     return redirect("/grade-add")
 

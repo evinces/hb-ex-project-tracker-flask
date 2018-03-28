@@ -1,24 +1,29 @@
-<!doctype html>
-<html>
-<head>
-    <title>Homepage</title>
-</head>
-<body>
-    {% if students %}
+{% extends 'base.html' %}
+
+{%- block body -%}
+{% if students %}
+<div class="col">
     <h2>Students</h2>
     <ul>
         {% for first, last, github in students %}
         <li><a href="/student?github={{ github }}">{{ first }} {{ last }}</a></li>
         {% endfor %}
     </ul>
-    {% endif %}
-    {% if projects %}
+</div>
+{%- endif -%}
+{%- if projects -%}
+<div class="col">
     <h2>Projects</h2>
     <ul>
         {% for title in projects %}
         <li><a href="/project?title={{ title }}">{{ title }}</a></li>
         {% endfor %}
     </ul>
-    {% endif %}
-</body>
-</html>
+</div>
+{%- endif -%}
+<nav><!--
+ --><a href="/student-add" class="btn">Add a student</a><!--
+ --><a href="/project-add" class="btn">Add a project</a><!--
+ --><a href="/grade-add" class="btn">Add a grade</a><!--
+--></nav>
+{%- endblock -%}

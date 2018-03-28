@@ -1,30 +1,26 @@
-<!doctype html>
-<html>
-<head>
-    <title>Add New Grade</title>
-<body>
-    {% for message in get_flashed_messages() %}
-        <p>Grade added: <a href="/project?title={{ message }}">Link to project</a></p>
-    {% endfor %}
-    <form action="/grade-add" method="POST">
-        <label>Project Title
-            <select name="project_title">
-                {% for title in projects %}
-                <option value="{{ title }}">{{ title }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <label>Student Name
-            <select name="student_github">
-                {% for first, last, github in students %}
-                <option value="{{ github }}">{{ first }} {{ last }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <label>Grade
-            <input type="number" name="grade">
-        </label>
-        <input type="submit" value="Add Grade">
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Add a Grade{% endblock %}
+
+{% block body %}
+<form action="/grade-add" method="POST">
+    <label>Project Title
+        <select name="project_title">
+            {% for title in projects %}
+            <option value="{{ title }}">{{ title }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Student Name
+        <select name="student_github">
+            {% for first, last, github in students %}
+            <option value="{{ github }}">{{ first }} {{ last }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Grade
+        <input type="number" name="grade">
+    </label>
+    <input type="submit" value="Add Grade">
+</form>
+{% endblock %}

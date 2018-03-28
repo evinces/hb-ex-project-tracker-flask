@@ -1,0 +1,45 @@
+body {
+    width: 500px;
+    margin: 50px auto;
+}
+
+.col {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+nav {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.btn {
+    margin: 0;
+    border-width: 1px;
+    padding: 7px 10px;
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+    border-color: #bbb;
+    border-style: solid;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #000;
+}
+.btn:nth-child(2) {
+    margin: 0 67px;
+}
+
+.btn:hover {
+    background-color: #ddd;
+}
+
+a:visited {
+    color: #555;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
